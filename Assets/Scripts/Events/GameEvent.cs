@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Territory.Events
 {
-    [CreateAssetMenu(fileName = "New Event", menuName ="Event")]
+    [CreateAssetMenu(fileName = "New Event", menuName ="Event/Event")]
     public class GameEvent : ScriptableObject
     {
         private List<GameEventListener> _listeners = new List<GameEventListener>();

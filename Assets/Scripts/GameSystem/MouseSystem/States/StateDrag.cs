@@ -19,6 +19,7 @@ namespace Territory.GameSystem.MouseSystem.States
             mousePosition.z = 0;
             _objectToDrag = GameObject.Instantiate(_mouse.CirclePrefab, mousePosition, Quaternion.identity); ;;
             Cursor.visible = false;
+            _mouse.SelectNode(_mouse.SelectedGameObject);
         }
 
         public override void Execute()

@@ -19,6 +19,7 @@ namespace Territory.GameSystem.MouseSystem.States
             {
                 raycastHit.collider.gameObject.GetComponent<Renderer>().material.color = Color.red;
             }
+            _mouse.UnselectNode();
         }
 
         public override void Execute()

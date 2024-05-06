@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Territory.GameSystem.MouseSystem.States;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace Territory.GameSystem.MouseSystem
@@ -10,6 +11,10 @@ namespace Territory.GameSystem.MouseSystem
     {
         [SerializeField]
         private GameObject _circlePrefab;
+        [SerializeField]
+        private UnityEvent<GameObject> OnSelection;
+        [SerializeField]
+        private UnityEvent<GameObject> OnUnselection;
         [SerializeField]
         private bool _debugMode;
         private State _currentState;
@@ -62,8 +67,16 @@ namespace Territory.GameSystem.MouseSystem
             else
             {
                 IsSelected = false;
-                SelectedGameObject = null;
+               // SelectedGameObject = null;
             }
+        }
+        public void SelectNode(GameObject objectSelected)
+        {
+            OnSelection.Invoke(objectSelected);
+        }
+        public void UnselectNode()
+        {
+            OnUnselection.Invoke(SelectedGameObject);
         }
     }
 }
