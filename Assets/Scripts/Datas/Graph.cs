@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using UnityEngine;
 
 namespace Territory.Datas
@@ -76,6 +77,38 @@ namespace Territory.Datas
         {
             _edges[node1.ToString()].Remove(node2);
             _edges[node2.ToString()].Remove(node1);
+        }
+        public string PrintEdges()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach(var edge in _edges)
+            {
+                stringBuilder.AppendLine($"Edge from {edge.Key} :");
+                for (int i=0; i<edge.Value.Count; i++)
+                {
+                    stringBuilder.AppendLine($"=> {edge.Value[i]}");
+                }
+                stringBuilder.AppendLine("####");
+            }
+            return stringBuilder.ToString();
+        }
+
+        public List<Pair<T, T>> GetUndirectedEdges()
+        {
+            List<Pair<T, T >> result = new List<Pair<T, T>>();
+
+            foreach (var edge in _edges)
+            {
+                for (int i = 0; i < edge.Value.Count; i++)
+                {
+                    if (!result.Contains(new Pair<T,T>(_nodes[edge.Key], edge.Value[i])) && !result.Contains(new Pair<T, T>(edge.Value[i], _nodes[edge.Key])))
+                    {
+                        result.Add(new Pair<T, T>(_nodes[edge.Key], edge.Value[i]));
+                    }
+                }
+            }
+
+            return result;
         }
 
     }

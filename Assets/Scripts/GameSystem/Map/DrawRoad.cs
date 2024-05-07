@@ -12,8 +12,9 @@ public class DrawRoad : MonoBehaviour
     [SerializeField]
     private List<Transform> _roads;
     [SerializeField]
-    private GameObject _linePrefab;
+    private GameObject _roadPrefab;
 
+    private List<GameObject> _roadList;
 
     // Start is called before the first frame update
     void Start()
@@ -40,37 +41,22 @@ public class DrawRoad : MonoBehaviour
         // GameObject line = Instantiate(_linePrefab, )
     }
     
-    public void DrawGraph(Graph<GameObject> graph, GameObject startingNode)
+    public void DrawGraph(Graph<GameObject> graph)
     {
+        _roadList = new List<GameObject>();
+        List<Pair<GameObject, GameObject>> edges = graph.GetUndirectedEdges();
 
-        var visited = new HashSet<string>();
-        var queue = new Queue<GameObject>();
-        queue.Enqueue(startingNode);
-        int index = 0;
-        while (queue.Count > 0)
+        for (int i = 0; i < edges.Count; i++)
         {
-            var current = queue.Dequeue();
-            if (!visited.Add(current.ToString()))
-            {
-                continue;
-            }
-            _lineRenderer.positionCount = index + 1;
-            _lineRenderer.SetPosition(index, current.transform.position);
-            index++;
-
+            GameObject road = Instantiate(_roadPrefab, gameObject.transform);
+            LineRenderer lr = road.GetComponent<LineRenderer>();
+            lr.positionCount = 2;
+            lr.SetPosition(0, edges[i].Value1.transform.position);
+            lr.SetPosition(1, edges[i].Value2.transform.position);
+            _roadList.Add(road);
             
-            foreach (var connection in graph.GetNeighbours(current))
-            {
-                queue.Enqueue(connection);
-                _lineRenderer.positionCount = index + 1;
-                _lineRenderer.SetPosition(index, connection.transform.position);
-                index++;
-               
-                _lineRenderer.positionCount = index + 1;
-                _lineRenderer.SetPosition(index, current.transform.position);
-                index++;
-            }
         }
+       
         
     }
 }

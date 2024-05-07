@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Territory.Datas;
 using Territory.GameSystem.MouseSystem.States;
 using UnityEngine;
 using UnityEngine.Events;
@@ -13,6 +14,8 @@ namespace Territory.GameSystem.MouseSystem
         private GameObject _circlePrefab;
         [SerializeField]
         private UnityEvent<GameObject> OnSelection;
+        [SerializeField]
+        private UnityEvent<Pair<GameObject,GameObject>> OnValueMoved;
         [SerializeField]
         private UnityEvent<GameObject> OnUnselection;
         [SerializeField]
@@ -77,6 +80,10 @@ namespace Territory.GameSystem.MouseSystem
         public void UnselectNode()
         {
             OnUnselection.Invoke(SelectedGameObject);
+        }
+        public void MoveValue(GameObject target)
+        {
+            OnValueMoved.Invoke(new Pair<GameObject, GameObject>(SelectedGameObject, target));
         }
     }
 }

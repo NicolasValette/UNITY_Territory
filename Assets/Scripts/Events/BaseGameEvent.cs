@@ -1,23 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using Territory.Events;
 using UnityEngine;
 
 namespace Territory.Events
 {
-    [CreateAssetMenu(fileName = "New ParamEvent", menuName = "Event/Param")]
-    public class ParamGameEvent : ScriptableObject
+    public abstract class BaseGameEvent<T>: ScriptableObject
     {
-        private List<ParamGameEventListener> _listeners = new List<ParamGameEventListener>();
+        private List<BaseGameEventListener<T>> _listeners = new List<BaseGameEventListener<T>>();
 
-        public void Subscribe(ParamGameEventListener listener)
+        public void Subscribe(BaseGameEventListener<T> listener)
         {
             _listeners.Add(listener);
         }
-        public void Unsubscribe(ParamGameEventListener listener)
+        public void Unsubscribe(BaseGameEventListener<T> listener)
         {
             _listeners.Remove(listener);
         }
-        public void Raise(GameObject item)
+        public void Raise(T item)
         {
             for (int i = _listeners.Count - 1; i >= 0; i--)
             {
@@ -25,5 +25,4 @@ namespace Territory.Events
             }
         }
     }
-   
 }

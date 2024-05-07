@@ -18,6 +18,7 @@ namespace Territory.GameSystem.MouseSystem.States
             if (raycastHit.collider != null)
             {
                 raycastHit.collider.gameObject.GetComponent<Renderer>().material.color = Color.red;
+                _mouse.MoveValue(raycastHit.collider.gameObject);
             }
             _mouse.UnselectNode();
         }
