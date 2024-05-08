@@ -14,6 +14,7 @@ namespace Territory.GameSystem.Node
         [SerializeField]
         private TMP_Text _valueText;
         private NodeState _currentState;
+        private Vector3 _startingScale;
 
         private int _value;
         public int Value { get { return _value; } }
@@ -23,6 +24,7 @@ namespace Territory.GameSystem.Node
             _value = _startingValue;
             _currentState = NodeState.Free;
             _valueText.text = _value.ToString();
+            _startingScale = transform.localScale;
         }
 
         // Update is called once per frame
@@ -39,6 +41,37 @@ namespace Territory.GameSystem.Node
         {
             _value = value;
             _valueText.text = _value.ToString();
+        }
+        public void SelectNode()
+        {
+            _currentState = NodeState.Selected;
+        }
+        public void UnselectNode()
+        {
+            _currentState = NodeState.Free;
+        }
+        public void NodeIsValid()
+        {
+            _currentState = NodeState.Valid;
+        }
+        public void NodeIsNotValid()
+        {
+            _currentState = NodeState.Free;
+        }
+
+        private void OnMouseEnter()
+        {
+            if (_currentState == NodeState.Valid)
+            {
+                _startingScale = transform.localScale;
+                transform.localScale += Vector3.one * 0.5f;
+            }
+        }
+        private void OnMouseExit()
+        {
+            
+                transform.localScale = _startingScale;
+            
         }
     }
 }

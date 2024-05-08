@@ -8,7 +8,7 @@ namespace Territory.Map
 {
     public class GraphManager : MonoBehaviour
     {
-        
+
         [SerializeField]
         private DrawRoad _drawer;
         [Header("List of roads")]
@@ -18,7 +18,7 @@ namespace Territory.Map
 
         private Graph<GameObject> _graph;
 
-
+        public Graph<GameObject> Graph { get => _graph;}
 
         // Start is called before the first frame update
         void Start()
@@ -47,9 +47,10 @@ namespace Territory.Map
         
         }
 
-        public Graph<GameObject> GetGraph()
-        { 
-            return _graph;
+       
+        public List<GameObject> GetNeighboursOfNode(GameObject node)
+        {
+            return _graph.GetNeighbours(node);
         }
         public void DrawGraph()
         {

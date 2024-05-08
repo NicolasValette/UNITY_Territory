@@ -197,6 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movementPrefab: {fileID: 6574905750505692068, guid: 51c7ec1db05785b45afc9d3152cf599a, type: 3}
+  _graphManager: {fileID: 927754070}
 --- !u!1001 &20814829
 PrefabInstance:
   m_ObjectHideFlags: 0

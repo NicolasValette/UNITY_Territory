@@ -51,8 +51,10 @@ public class DrawRoad : MonoBehaviour
             GameObject road = Instantiate(_roadPrefab, gameObject.transform);
             LineRenderer lr = road.GetComponent<LineRenderer>();
             lr.positionCount = 2;
-            lr.SetPosition(0, edges[i].Value1.transform.position);
-            lr.SetPosition(1, edges[i].Value2.transform.position);
+            lr.SetPosition(0, edges[i].Value1.transform.position + (Vector3.forward * 0.1f));
+            lr.SetPosition(1, edges[i].Value2.transform.position + (Vector3.forward * 0.1f));
+            lr.startColor = Color.red;
+            lr.endColor = Color.red;
             _roadList.Add(road);
             
         }

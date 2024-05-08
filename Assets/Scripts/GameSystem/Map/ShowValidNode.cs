@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Territory.Datas;
+using Territory.GameSystem.Node;
 using UnityEngine;
 
 namespace Territory.Map
@@ -22,28 +23,38 @@ namespace Territory.Map
         
         }
 
-        private void ChangeColorOfNeighbours (GameObject node, Color color)
+        private void ChangeColorOfNeighbours (GameObject node, Color color, bool isValid)
         {
             if (_graph == null)
             {
-                _graph = gameObject.GetComponent<GraphManager>().GetGraph();
+                _graph = gameObject.GetComponent<GraphManager>().Graph;
             }
 
             List<GameObject> neighbours = _graph.GetNeighbours(node);
             for (int i = 0; i < neighbours.Count; i++)
             {
                 neighbours[i].GetComponent<Renderer>().material.color = color;
+                if (isValid)
+                {
+                    neighbours[i].GetComponent<NodeElement>().NodeIsValid();
+                }
+                else
+                {
+                    neighbours[i].GetComponent<NodeElement>().NodeIsNotValid();
+                }
             }
         }
         public void ShowValidNodeFromSelection(GameObject startingNode)
         {
             Debug.Log("Show");
-            ChangeColorOfNeighbours(startingNode, Color.green);
+            startingNode.GetComponent<NodeElement>().SelectNode();
+            ChangeColorOfNeighbours(startingNode, Color.green, true);
         }
         public void HideValidNode(GameObject startingNode)
         {
             Debug.Log("Hide");
-            ChangeColorOfNeighbours(startingNode, Color.white);
+            startingNode.GetComponent<NodeElement>().UnselectNode();
+            ChangeColorOfNeighbours(startingNode, Color.white, false);
         }
 
     }
