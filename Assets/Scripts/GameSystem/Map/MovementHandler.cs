@@ -40,5 +40,21 @@ namespace Territory
 
 
         }
+        public bool TryMoveValue(Pair<GameObject, GameObject> movementOrder)
+        {
+            List<GameObject> neighbours = _graphManager.GetNeighboursOfNode(movementOrder.Value1);
+            if (neighbours.Contains(movementOrder.Value2))
+            {
+                GameObject go = Instantiate(_movementPrefab, movementOrder.Value1.transform.position, Quaternion.identity);
+                go.GetComponent<MoveValue>().Target = movementOrder.Value2;
+                go.GetComponent<MoveValue>().Value = movementOrder.Value1.GetComponent<NodeElement>().Value;
+                go.GetComponent<MoveValue>().StartMove();
+                movementOrder.Value1.GetComponent<NodeElement>().UpdateValue(0);
+                return true;
+            }
+            return false;
+
+
+        }
     }
 }

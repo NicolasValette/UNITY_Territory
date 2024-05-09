@@ -11,6 +11,8 @@ namespace Territory.GameSystem.MouseSystem
     public class MousePoint : MonoBehaviour
     {
         [SerializeField]
+        private MovementHandler _movementHandler;
+        [SerializeField]
         private GameObject _circlePrefab;
         [SerializeField]
         private UnityEvent<GameObject> OnSelection;
@@ -19,16 +21,20 @@ namespace Territory.GameSystem.MouseSystem
         [SerializeField]
         private UnityEvent<GameObject> OnUnselection;
         [SerializeField]
+        private UnityEvent OnPlayerEndMovement;
+        [SerializeField]
         private bool _debugMode;
         private State _currentState;
 
         public GameObject CirclePrefab { get => _circlePrefab; }
         public bool IsSelected { get; private set; }
+        public bool IsActive { get; private set; } = false;
+        public MovementHandler MovHandler { get => _movementHandler; }
         public GameObject SelectedGameObject { get; private set; }
         // Start is called before the first frame update
         void Start()
         {
-            _currentState = new StateIdle(this);
+            _currentState = new StateInactive(this);
         }
 
         // Update is called once per frame
@@ -56,21 +62,24 @@ namespace Territory.GameSystem.MouseSystem
 
         public void OnClick(InputValue value)
         {
-            if (value.isPressed)
+            if (_currentState is not StateInactive)
             {
-                Ray rayToMouse = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-                RaycastHit2D raycastHit = Physics2D.Raycast(rayToMouse.origin, rayToMouse.direction);
-                Debug.Log("ray");
-                if (raycastHit.collider != null)
+                if (value.isPressed)
                 {
-                    IsSelected = true;
-                    SelectedGameObject = raycastHit.collider.gameObject;
+                    Ray rayToMouse = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+                    RaycastHit2D raycastHit = Physics2D.Raycast(rayToMouse.origin, rayToMouse.direction);
+                    Debug.Log("ray");
+                    if (raycastHit.collider != null)
+                    {
+                        IsSelected = true;
+                        SelectedGameObject = raycastHit.collider.gameObject;
+                    }
                 }
-            }
-            else
-            {
-                IsSelected = false;
-               // SelectedGameObject = null;
+                else
+                {
+                    IsSelected = false;
+                    // SelectedGameObject = null;
+                }
             }
         }
         public void SelectNode(GameObject objectSelected)
@@ -81,9 +90,18 @@ namespace Territory.GameSystem.MouseSystem
         {
             OnUnselection.Invoke(SelectedGameObject);
         }
-        public void MoveValue(GameObject target)
+        public void EndMovement()
         {
-            OnValueMoved.Invoke(new Pair<GameObject, GameObject>(SelectedGameObject, target));
+            OnPlayerEndMovement.Invoke();
+        }
+        
+        public void ActivatePointer()
+        {
+            IsActive = true;
+        }
+        public void DeactivatePointer()
+        {
+            IsActive = false;
         }
     }
 }
