@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using Territory.Datas;
+using Territory.GameSystem.Node;
 using UnityEngine;
 
 namespace Territory.Map
@@ -55,6 +56,34 @@ namespace Territory.Map
         public void DrawGraph()
         {
             _drawer.DrawGraph(_graph);
+        }
+        public List<GameObject> GetListOfOwnedNode(int playerId)
+        {
+            List<GameObject> ownedList = new List<GameObject>();
+            List <GameObject> nodes =  _graph.Nodes;
+
+            for (int i=0; i<nodes.Count;i++)
+            {
+                if (nodes[i].GetComponent<NodeElement>().OwnerID == playerId)
+                {
+                    ownedList.Add(nodes[i]);
+                }
+            }
+            return ownedList;
+        }
+        public List<GameObject> GetListOfOwnedNodeWithValue(int playerId)
+        {
+            List<GameObject> ownedList = new List<GameObject>();
+            List<GameObject> nodes = _graph.Nodes;
+
+            for (int i = 0; i < nodes.Count; i++)
+            {
+                if (nodes[i].GetComponent<NodeElement>().OwnerID == playerId && nodes[i].GetComponent<NodeElement>().Value > 0)
+                {
+                    ownedList.Add(nodes[i]);
+                }
+            }
+            return ownedList;
         }
     }
 }

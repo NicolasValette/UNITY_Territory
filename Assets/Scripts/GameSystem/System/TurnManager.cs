@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Territory.GameSystem.PlayableCharacter;
+using Territory.System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,7 +13,7 @@ namespace Territory.GameSystem
   
 
         [SerializeField]
-        private List<Character> _characterList;
+        private PlayersHandler _playersHandler;
         [SerializeField]
         private TMP_Text _playerText;
 
@@ -26,23 +27,23 @@ namespace Territory.GameSystem
         // Update is called once per frame
         void Update()
         {
-            if(Keyboard.current.tKey.wasPressedThisFrame)
-            {
-                StartRound();
-            }
+           
         }
+
+
 
         public void StartRound()
         {
-            _currentPlayerIndex = Random.Range(0, _characterList.Count);
+            _playersHandler.CreatePlayersList(1, 1);
+            _currentPlayerIndex = Random.Range(0, _playersHandler.PlayersList.Count);
             _playerText.text = _currentPlayerIndex.ToString();
-            _characterList[_currentPlayerIndex].Play();
+            _playersHandler.PlayersList[_currentPlayerIndex].Play();
         }
 
         private Character GetNextPlayer()
         {
-            _currentPlayerIndex = (_currentPlayerIndex + 1) % _characterList.Count;
-            return _characterList[_currentPlayerIndex];
+            _currentPlayerIndex = (_currentPlayerIndex + 1) % _playersHandler.PlayersList.Count;
+            return _playersHandler.PlayersList[_currentPlayerIndex];
         }
 
         public void NewTurn()

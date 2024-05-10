@@ -14,7 +14,7 @@ namespace Territory.GameSystem.MouseSystem.States
 
         public override void EnterState()
         {
-            _mouse.SelectedGameObject.GetComponent<Renderer>().material.color = Color.red;
+           // _mouse.SelectedGameObject.GetComponent<Renderer>().material.color = Color.red;
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
             mousePosition.z = 0;
             _objectToDrag = GameObject.Instantiate(_mouse.CirclePrefab, mousePosition, Quaternion.identity); ;;

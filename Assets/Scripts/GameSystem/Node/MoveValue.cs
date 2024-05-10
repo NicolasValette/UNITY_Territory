@@ -17,6 +17,7 @@ namespace Territory
         public GameObject Target { get; set; }
 
         public int Value { get; set; }
+        public int Owner { get; set; }
 
 
 
@@ -35,6 +36,7 @@ namespace Territory
                 if (nodeElement != null)
                 {
                     nodeElement.AddValue(Value);
+                    nodeElement.ChangeOwner(Owner);
                 }
 
                 Destroy(gameObject);

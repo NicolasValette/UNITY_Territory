@@ -14,7 +14,7 @@ namespace Territory.Datas
         private Dictionary<string, List<T>> _edges;
         private Dictionary<string, T> _nodes;
 
-
+        public List<T> Nodes { get => _nodes.Values.ToList(); }
 
         public Graph() 
         {

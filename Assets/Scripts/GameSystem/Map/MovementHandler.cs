@@ -34,6 +34,7 @@ namespace Territory
                 GameObject go = Instantiate(_movementPrefab, movementOrder.Value1.transform.position, Quaternion.identity);
                 go.GetComponent<MoveValue>().Target = movementOrder.Value2;
                 go.GetComponent<MoveValue>().Value = movementOrder.Value1.GetComponent<NodeElement>().Value;
+                go.GetComponent<MoveValue>().Owner = movementOrder.Value1.GetComponent<NodeElement>().OwnerID;
                 go.GetComponent<MoveValue>().StartMove();
                 movementOrder.Value1.GetComponent<NodeElement>().UpdateValue(0);
             }
@@ -48,8 +49,10 @@ namespace Territory
                 GameObject go = Instantiate(_movementPrefab, movementOrder.Value1.transform.position, Quaternion.identity);
                 go.GetComponent<MoveValue>().Target = movementOrder.Value2;
                 go.GetComponent<MoveValue>().Value = movementOrder.Value1.GetComponent<NodeElement>().Value;
+                go.GetComponent<MoveValue>().Owner = movementOrder.Value1.GetComponent<NodeElement>().OwnerID;
                 go.GetComponent<MoveValue>().StartMove();
                 movementOrder.Value1.GetComponent<NodeElement>().UpdateValue(0);
+
                 return true;
             }
             return false;

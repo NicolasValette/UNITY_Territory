@@ -24,7 +24,8 @@ namespace Territory.GameSystem.MouseSystem.States
                 raycastHit.collider.gameObject.GetComponent<Renderer>().material.color = Color.red;
               
                 _isMoveSucessfull =  _mouse.MovHandler.TryMoveValue(new Pair<GameObject, GameObject>(_mouse.SelectedGameObject, raycastHit.collider.gameObject));
-                _mouse.EndMovement();
+                Debug.Log("Move is " + _isMoveSucessfull);
+                
               
             }
             _mouse.UnselectNode();
@@ -38,6 +39,10 @@ namespace Territory.GameSystem.MouseSystem.States
         public override void ExitState()
         {
             _mouse.DeactivatePointer();
+            if (_isMoveSucessfull )
+            {
+                _mouse.EndMovement();   
+            }
         }
 
         public override State GetNextState()
