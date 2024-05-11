@@ -8,7 +8,7 @@ namespace Territory.GameSystem.PlayableCharacter
     public class Player : Character
     {
         [SerializeField]
-        private UnityEvent OnNewPlayerTurn;
+        private UnityEvent<int> OnNewPlayerTurn;
         // Start is called before the first frame update
         void Start()
         {
@@ -24,8 +24,8 @@ namespace Territory.GameSystem.PlayableCharacter
         public override void Play()
         {
             Debug.Log("Player Turn");
-            OnNewPlayerTurn.Invoke();
-            StartCoroutine(Wait(_waitingTime));
+            OnNewPlayerTurn.Invoke(ID);
+            //StartCoroutine(Wait(_waitingTime));
         }
         public void EndTurn()
         {

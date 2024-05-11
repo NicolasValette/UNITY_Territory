@@ -85,5 +85,16 @@ namespace Territory.Map
             }
             return ownedList;
         }
+        public int GetValueForPlayer(int playerID)
+        {
+            int value = 0;
+            List<GameObject> ownedList = GetListOfOwnedNodeWithValue(playerID);
+            for (int i = 0; i<ownedList.Count;i++)
+            {
+                value += ownedList[i].GetComponent<NodeElement>().Value;
+            }
+            return value;
+
+        }
     }
 }

@@ -29,6 +29,23 @@ namespace Territory.System
         {
             
         }
+        public int GetNumberOfRemainingPlayer()
+        {
+            
+            return GetIDsOfAlivePlayers().Count;
+        }
+        public List<int> GetIDsOfAlivePlayers()
+        {
+            List<int> ids = new List<int>();
+            for (int i = 0; i < PlayersList.Count; i++)
+            {
+                if (!PlayersList[i].IsEliminated)
+                {
+                    ids.Add(PlayersList[i].ID);
+                }
+            }
+            return ids;
+        }
         public void CreatePlayersList(int nbComputerPlayer, int nbHumanPlayer = 1)
         {
             PlayerGOList = new List<GameObject>();

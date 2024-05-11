@@ -28,27 +28,19 @@ namespace Territory
             //transform.rotation = Quaternion.LookRotation(EndingPosition - transform.position, transform.right);
             _isMovementFinish = false;
         }
-        private void Update()
-        {
-            if (_isMovementFinish)
-            {
-                NodeElement nodeElement = Target.GetComponent<NodeElement>();
-                if (nodeElement != null)
-                {
-                    nodeElement.AddValue(Value);
-                    nodeElement.ChangeOwner(Owner);
-                }
 
-                Destroy(gameObject);
-
-            }
-        }
 
         public void StartMove()
         {
             _valueText.text = Value.ToString();
             if (_verbose) Debug.Log($"Moving {Value} from {transform.position} to {Target.transform.position}");
-            
+
+            NodeElement nodeElement = Target.GetComponent<NodeElement>();
+            if (nodeElement != null)
+            {
+                nodeElement.ConquerNode(Value, Owner);
+
+            }
             StartCoroutine(Move());
         }
 
@@ -65,6 +57,8 @@ namespace Territory
             }
             transform.position = Target.transform.position;
             _isMovementFinish = true;
+            Target.GetComponent<NodeElement>().UpdateDisplay();
+            Destroy(gameObject);
         }
     }
 }

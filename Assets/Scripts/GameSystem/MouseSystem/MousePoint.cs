@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Territory.Datas;
 using Territory.GameSystem.MouseSystem.States;
+using Territory.GameSystem.Node;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -17,7 +18,7 @@ namespace Territory.GameSystem.MouseSystem
         [SerializeField]
         private UnityEvent<GameObject> OnSelection;
         [SerializeField]
-        private UnityEvent<Pair<GameObject,GameObject>> OnValueMoved;
+        private UnityEvent<Pair<GameObject, GameObject>> OnValueMoved;
         [SerializeField]
         private UnityEvent<GameObject> OnUnselection;
         [SerializeField]
@@ -29,6 +30,7 @@ namespace Territory.GameSystem.MouseSystem
         public GameObject CirclePrefab { get => _circlePrefab; }
         public bool IsSelected { get; private set; }
         public bool IsActive { get; private set; } = false;
+        public int PlayerID { get; private set; } = -1;
         public MovementHandler MovHandler { get => _movementHandler; }
         public GameObject SelectedGameObject { get; private set; }
         // Start is called before the first frame update
@@ -62,6 +64,7 @@ namespace Territory.GameSystem.MouseSystem
 
         public void OnClick(InputValue value)
         {
+            Debug.Log("click");
             if (_currentState is not StateInactive)
             {
                 if (value.isPressed)
@@ -71,8 +74,10 @@ namespace Territory.GameSystem.MouseSystem
                     Debug.Log("ray");
                     if (raycastHit.collider != null)
                     {
+
                         IsSelected = true;
                         SelectedGameObject = raycastHit.collider.gameObject;
+
                     }
                 }
                 else
@@ -94,14 +99,23 @@ namespace Territory.GameSystem.MouseSystem
         {
             OnPlayerEndMovement.Invoke();
         }
-        
+
         public void ActivatePointer()
         {
             IsActive = true;
         }
+        public void StartPlayerTurn(int playerID)
+        {
+            Debug.Log("playerID : " + playerID);
+            PlayerID = playerID;
+        }
         public void DeactivatePointer()
         {
             IsActive = false;
+        }
+        public void BadSelection()
+        {
+            IsSelected = false;
         }
     }
 }

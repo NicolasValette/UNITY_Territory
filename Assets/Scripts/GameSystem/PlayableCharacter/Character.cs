@@ -15,12 +15,19 @@ namespace Territory.GameSystem.PlayableCharacter
         public abstract void Play();
 
         private int _playerID;
+        public bool IsEliminated { get;private set; }
 
         public int ID { get => _playerID; protected set { _playerID = value;} }
 
         public void InitPlayer(int playerID)
         {
             _playerID = playerID;
+            IsEliminated = false;
+        }
+        public void Eliminate()
+        {
+            Debug.Log("Player ID " + _playerID + " eliminated");
+            IsEliminated = true;
         }
 
         public IEnumerator Wait(float waitingTime, Action action = null)

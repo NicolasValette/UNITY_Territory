@@ -37,6 +37,7 @@ namespace Territory
                 go.GetComponent<MoveValue>().Owner = movementOrder.Value1.GetComponent<NodeElement>().OwnerID;
                 go.GetComponent<MoveValue>().StartMove();
                 movementOrder.Value1.GetComponent<NodeElement>().UpdateValue(0);
+                movementOrder.Value1.GetComponent<NodeElement>().UpdateDisplay();
             }
 
 
@@ -52,6 +53,7 @@ namespace Territory
                 go.GetComponent<MoveValue>().Owner = movementOrder.Value1.GetComponent<NodeElement>().OwnerID;
                 go.GetComponent<MoveValue>().StartMove();
                 movementOrder.Value1.GetComponent<NodeElement>().UpdateValue(0);
+                movementOrder.Value1.GetComponent<NodeElement>().UpdateDisplay();
 
                 return true;
             }

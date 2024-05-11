@@ -53,15 +53,36 @@ namespace Territory.GameSystem.Node
         {
 
         }
+        public void ConquerNode (int value, int attackID)
+        {
 
+            if (_ownerID == attackID || _ownerID == -1)     // When we conquer free or move on owned node
+            {
+                AddValue(value);
+                ChangeOwner(attackID);
+            }
+            else                                            // When we attack node
+            {
+                int newValue;
+                if (value >= _value)    //attack succed
+                {
+                    newValue = value - _value;
+                    ChangeOwner(attackID);
+                }
+                else // attack failed
+                {
+                    newValue = _value - value;
+                }
+                 UpdateValue(newValue);
+            }
+        }
         public void AddValue(int value)
         {
             UpdateValue(_value + value);
         }
         public void UpdateValue(int value)
         {
-            _value = value;
-            _valueText.text = _value.ToString();
+            _value = (value >= 0)?value:0;
         }
         public void SelectNode()
         {
@@ -82,11 +103,15 @@ namespace Territory.GameSystem.Node
         public void ChangeOwner (int ID)
         {
             _ownerID = ID;
+        }
+        public void UpdateDisplay()
+        {
+            _valueText.text = _value.ToString();
             if (_ownerID == 0)
             {
                 _renderer.material.color = Color.blue;
             }
-            else if (OwnerID == 1)
+            else if (_ownerID == 1)
             {
                 _renderer.material.color = Color.red;
             }
