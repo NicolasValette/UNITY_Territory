@@ -24,6 +24,7 @@ namespace Territory.Animation
         {
         
         }
+       
         private void PlayAnimation()
         {
             _animator.SetTrigger("Play");
@@ -36,6 +37,11 @@ namespace Territory.Animation
         public void PlayEnnemyAnimation()
         {
             _text.text = "New Ennemy turn !";
+            PlayAnimation();
+        }
+        public void PlayGrowthAnimation()
+        {
+            _text.text = "Army growth !";
             PlayAnimation();
         }
     }

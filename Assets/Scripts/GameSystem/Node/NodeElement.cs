@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Territory.Animation;
 using TMPro;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
@@ -15,10 +16,15 @@ namespace Territory.GameSystem.Node
         [SerializeField]
         private int _startingOwner = -1;
         [SerializeField]
+        private int _growthValue = 1;
+        [SerializeField]
+        private TMP_Text _growthText;
+        [SerializeField]
         private TMP_Text _valueText;
         private NodeState _currentState;
         private Vector3 _startingScale;
         public int Value { get => _value; }
+        public int Growth { get => _growthValue; }
         public int OwnerID { get => _ownerID; }
 
         private Renderer _renderer;
@@ -32,6 +38,7 @@ namespace Territory.GameSystem.Node
             _value = _startingValue;
             _currentState = NodeState.Free;
             _valueText.text = _value.ToString();
+            _growthText.text = $"+{_growthValue}";
             _startingScale = transform.localScale;
             _renderer = GetComponent<Renderer>();
             if (_ownerID == 0)
@@ -45,7 +52,9 @@ namespace Territory.GameSystem.Node
             else
             {
                 _renderer.material.color = Color.white;
+                GetComponentInChildren<PlayAnimationOnEvent>().IsActive = false;
             }
+
         }
 
         // Update is called once per frame
@@ -102,6 +111,10 @@ namespace Territory.GameSystem.Node
         }
         public void ChangeOwner (int ID)
         {
+            if (ID != -1)
+            {
+                GetComponentInChildren<PlayAnimationOnEvent>().IsActive = true;
+            }
             _ownerID = ID;
         }
         public void UpdateDisplay()
@@ -119,6 +132,19 @@ namespace Territory.GameSystem.Node
             {
                 _renderer.material.color = Color.white;
             }
+        }
+        public void GrowPopulation()
+        {
+            if (_ownerID != -1)
+            {
+                _value += _growthValue;
+            }
+            UpdateDisplay();
+        }
+        public void SetGrowth(int growth)
+        {
+            _growthValue = growth;
+            _growthText.text = $"+{_growthValue}";
         }
 
         private void OnMouseEnter()
