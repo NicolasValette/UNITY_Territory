@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Territory
+namespace Territory.GameSystem
 {
     public class ArmyGrowth : MonoBehaviour
     {

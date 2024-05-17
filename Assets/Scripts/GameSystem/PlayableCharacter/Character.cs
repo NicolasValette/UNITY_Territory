@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Territory.Datas;
+using Territory.GameSystem.Interfaces;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -38,6 +40,7 @@ namespace Territory.GameSystem.PlayableCharacter
                 action();   
             }
         }
-        
+
+     
     }
 }

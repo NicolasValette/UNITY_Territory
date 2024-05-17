@@ -47,7 +47,8 @@ namespace Territory.GameSystem.MouseSystem.States
 
         public override State GetNextState()
         {
-            return (!_isMoveSucessfull) ? new StateIdle(_mouse) : new StateInactive(_mouse);
+            //return (!_isMoveSucessfull) ? new StateIdle(_mouse) : new StateInactive(_mouse);
+            return new StateIdle(_mouse);
         }
     }
 }

@@ -2,18 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using Territory.Datas;
 using Territory.GameSystem.AI;
+using Territory.GameSystem.Interfaces;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace Territory.GameSystem.PlayableCharacter
 {
-    public class Computer : Character
+    public class Computer : Character, IBrain
     {
 
         [SerializeField]
         private UnityEvent OnNewEnnemyTurn;
         [SerializeField]
         private UnityEvent<Pair<GameObject, GameObject>> OnValueMoved;
+
 
         private AIManager _ai;
 
@@ -50,6 +52,11 @@ namespace Territory.GameSystem.PlayableCharacter
                 Debug.Log("EndTurnCPU");
                 OnEndTurn.Invoke();
             }));
+        }
+
+        public Pair<GameObject, GameObject> GetNextMove(Graph<GameObject> graph)
+        {
+            return _ai.GetNextMove(ID);
         }
     }
 }

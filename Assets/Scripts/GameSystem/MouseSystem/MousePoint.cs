@@ -30,7 +30,7 @@ namespace Territory.GameSystem.MouseSystem
         public GameObject CirclePrefab { get => _circlePrefab; }
         public bool IsSelected { get; private set; }
         public bool IsActive { get; private set; } = false;
-        public int PlayerID { get; private set; } = -1;
+        public int PlayerID { get; private set; } = 0;
         public MovementHandler MovHandler { get => _movementHandler; }
         public GameObject SelectedGameObject { get; private set; }
         // Start is called before the first frame update

@@ -277,6 +277,7 @@ MonoBehaviour:
   _growthValue: 1
   _growthText: {fileID: 6258226235074418126}
   _valueText: {fileID: 5433600680221893679}
+  _value: 0
 --- !u!114 &8370616916048583480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,7 +335,7 @@ MonoBehaviour:
   _response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 7836430261110826123}
         m_TargetAssemblyTypeName: Territory.GameSystem.Node.NodeElement, Assembly-CSharp
         m_MethodName: GrowPopulation
         m_Mode: 1

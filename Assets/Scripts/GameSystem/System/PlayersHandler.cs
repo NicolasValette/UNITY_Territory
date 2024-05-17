@@ -4,7 +4,7 @@ using Territory.GameSystem.AI;
 using Territory.GameSystem.PlayableCharacter;
 using UnityEngine;
 
-namespace Territory.System
+namespace Territory.GameSystem
 {
     public class PlayersHandler : MonoBehaviour
     {
@@ -69,6 +69,17 @@ namespace Territory.System
                 PlayerGOList.Add(player);
                 PlayersList.Add(player.GetComponent<Character>());
             }
+        }
+        public Character GetPlayerByID(int id)
+        {
+            for (int i=0; i<PlayersList.Count; i++)
+            {
+                if (PlayersList[i].ID == id)
+                {
+                    return PlayersList[i];
+                }
+            }
+            return null;
         }
         
     }

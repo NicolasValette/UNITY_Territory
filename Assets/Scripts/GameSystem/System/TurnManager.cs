@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Territory.GameSystem;
 using Territory.GameSystem.PlayableCharacter;
 using Territory.Map;
-using Territory.System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;

@@ -30,6 +30,7 @@ namespace Territory.GameSystem.Node
         protected Renderer _renderer;
 
         protected int _ownerID;
+        [SerializeField]
         protected int _value;
         public abstract void ConquerNode(int value, int attackID);
         // Start is called before the first frame update

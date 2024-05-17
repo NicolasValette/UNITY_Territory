@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace Territory
+namespace Territory.GameSystem
 {
     public class SkipTurn : MonoBehaviour
     {

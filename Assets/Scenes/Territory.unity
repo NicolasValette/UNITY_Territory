@@ -1018,8 +1018,8 @@ GameObject:
   - component: {fileID: 640722096}
   - component: {fileID: 640722097}
   - component: {fileID: 640722098}
-  - component: {fileID: 640722099}
   - component: {fileID: 640722100}
+  - component: {fileID: 640722101}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1244,34 +1244,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &640722099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 640722093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37a6ec807ea406b46b1d173241acf116, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gameEvent: {fileID: 11400000, guid: f4c777e2a7930cb4c9fc912bb1c48780, type: 2}
-  _response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 640722097}
-        m_TargetAssemblyTypeName: Territory.GameSystem.MouseSystem.MousePoint, Assembly-CSharp
-        m_MethodName: StartPlayerTurn
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &640722100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1291,6 +1263,34 @@ MonoBehaviour:
       - m_Target: {fileID: 640722097}
         m_TargetAssemblyTypeName: Territory.GameSystem.MouseSystem.MousePoint, Assembly-CSharp
         m_MethodName: DeactivatePointer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &640722101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640722093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e129e28a578d73478a0371ccf5b83ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameEvent: {fileID: 11400000, guid: bc09cc31007d7d741a08af2636cfa43a, type: 2}
+  _response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 640722097}
+        m_TargetAssemblyTypeName: Territory.GameSystem.MouseSystem.MousePoint, Assembly-CSharp
+        m_MethodName: ActivatePointer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1509,6 +1509,100 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5313514130909269008, guid: 5102720407f690f45a869cc402e43231, type: 3}
   m_PrefabInstance: {fileID: 765498463}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &779273768
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 779273769}
+  - component: {fileID: 779273770}
+  m_Layer: 0
+  m_Name: TimeHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &779273769
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 779273768}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1778940944}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &779273770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 779273768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbbf2c502751d664187a99d121f5784b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameTickDuration: 2
+  _AIReflexionTime: 0.75
+  _playersHandler: {fileID: 1661120932}
+  _graph: {fileID: 927754070}
+  OnGameStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: bc09cc31007d7d741a08af2636cfa43a, type: 2}
+        m_TargetAssemblyTypeName: Territory.Events.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnGameTick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 4c3e4e9ab0b09524ea8a9cd0bb4711f4, type: 2}
+        m_TargetAssemblyTypeName: Territory.Events.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnValueMoved:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: a69782895f6f5194c81e1d6ea4494c20, type: 2}
+        m_TargetAssemblyTypeName: Territory.Events.BaseGameEvent`1[[Territory.Datas.Pair`2[[UnityEngine.GameObject,
+          UnityEngine
+        m_MethodName: Raise
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &803833867
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1838,7 +1932,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &912888294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3229,9 +3323,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 912888294}
-        m_TargetAssemblyTypeName: Territory.GameSystem.TurnManager, Assembly-CSharp
-        m_MethodName: StartRound
+      - m_Target: {fileID: 779273770}
+        m_TargetAssemblyTypeName: Territory.GameSystem.TimeHandler, Assembly-CSharp
+        m_MethodName: StartGameTime
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4043,6 +4137,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 912888295}
+  - {fileID: 779273769}
   - {fileID: 1661120931}
   - {fileID: 927754071}
   - {fileID: 1171601445}
