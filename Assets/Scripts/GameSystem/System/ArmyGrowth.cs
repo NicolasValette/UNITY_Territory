@@ -32,7 +32,10 @@ namespace Territory
 
         public void Growth()
         {
-            StartCoroutine(Wait(OnEndTurn.Invoke));
+            StartCoroutine(Wait(() => {
+                Debug.Log("EndGrowth");
+                OnEndTurn.Invoke();
+                }));
         }
     }
 }

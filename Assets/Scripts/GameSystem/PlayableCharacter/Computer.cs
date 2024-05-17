@@ -36,20 +36,18 @@ namespace Territory.GameSystem.PlayableCharacter
         }
         public override void Play()
         {
-            Debug.Log("Computer turn");
             if (_ai == null)
             {
                 Debug.LogError("AI Component missing on Computer player");
             }
             OnNewEnnemyTurn.Invoke();
 
-            Pair<GameObject, GameObject> chosenMove = _ai.ChooseMove(ID);
+            Pair<GameObject, GameObject> chosenMove = _ai.GetNextMove(ID);
            
-
-            //            StartCoroutine(Wait(_waitingTime, OnEndTurn.Invoke));
             StartCoroutine(Wait(_waitingTime, () =>
             {
                 OnValueMoved.Invoke(chosenMove);
+                Debug.Log("EndTurnCPU");
                 OnEndTurn.Invoke();
             }));
         }

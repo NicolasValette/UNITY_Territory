@@ -102,6 +102,7 @@ namespace Territory.GameSystem.MouseSystem
 
         public void ActivatePointer()
         {
+            Debug.Log("Enable");
             IsActive = true;
         }
         public void StartPlayerTurn(int playerID)
@@ -111,6 +112,7 @@ namespace Territory.GameSystem.MouseSystem
         }
         public void DeactivatePointer()
         {
+            Debug.Log("Disable");
             IsActive = false;
         }
         public void BadSelection()

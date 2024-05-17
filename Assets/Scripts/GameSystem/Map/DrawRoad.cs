@@ -56,8 +56,16 @@ public class DrawRoad : MonoBehaviour
             lr.endColor = Color.red;
             _roadList.Add(road);
             
+            
         }
-       
         
+    }
+    public void EraseAllRoad()
+    {
+        for (int i=0; i < _roadList.Count; i++)
+        {
+            Destroy(_roadList[i]);
+        }
+        _roadList.Clear();
     }
 }

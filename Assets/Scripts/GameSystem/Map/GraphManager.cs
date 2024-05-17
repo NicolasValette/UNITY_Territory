@@ -19,36 +19,37 @@ namespace Territory.Map
 
         private Graph<GameObject> _graph;
 
-        public Graph<GameObject> Graph { get => _graph;}
+        public Graph<GameObject> Graph { get => _graph; }
 
         // Start is called before the first frame update
         void Start()
         {
-            
+
+            BuildGraph();
+            DrawGraph();
+
+          
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+        public void BuildGraph()
+        {
             _graph = new Graph<GameObject>();
             //_graph.AddEdge(_gameObjects[0], _gameObjects[1]);
             //_graph.AddEdge(_gameObjects[1], _gameObjects[2]);
             //_graph.AddEdge(_gameObjects[1], _gameObjects[3]);
             //_graph.AddEdge(_gameObjects[3], _gameObjects[4]);
             //_graph.AddEdge(_gameObjects[4], _gameObjects[5]);
-            for (int i = 0;i < _roads.Count;i++)
+            for (int i = 0; i < _roads.Count; i++)
             {
                 _graph.AddEdge(_roads[i].Value1, _roads[i].Value2);
             }
-            DrawGraph();
-
-            //var a = (_gameObjects[1].transform.position - _gameObjects[0].transform.position).magnitude;
-            
-            //Debug.Log(a);
         }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
-
-       
         public List<GameObject> GetNeighboursOfNode(GameObject node)
         {
             return _graph.GetNeighbours(node);
@@ -57,12 +58,16 @@ namespace Territory.Map
         {
             _drawer.DrawGraph(_graph);
         }
+        public void EraseGraphEdges()
+        {
+            _drawer.EraseAllRoad();
+        }
         public List<GameObject> GetListOfOwnedNode(int playerId)
         {
             List<GameObject> ownedList = new List<GameObject>();
-            List <GameObject> nodes =  _graph.Nodes;
+            List<GameObject> nodes = _graph.Nodes;
 
-            for (int i=0; i<nodes.Count;i++)
+            for (int i = 0; i < nodes.Count; i++)
             {
                 if (nodes[i].GetComponent<NodeElement>().OwnerID == playerId)
                 {
@@ -89,7 +94,7 @@ namespace Territory.Map
         {
             int value = 0;
             List<GameObject> ownedList = GetListOfOwnedNodeWithValue(playerID);
-            for (int i = 0; i<ownedList.Count;i++)
+            for (int i = 0; i < ownedList.Count; i++)
             {
                 value += ownedList[i].GetComponent<NodeElement>().Value;
             }

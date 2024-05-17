@@ -23,7 +23,7 @@ namespace Territory.GameSystem.AI
             int selected = Random.Range(0, neighbours.Count);
             return neighbours[selected];
         }
-        public Pair<GameObject, GameObject> ChooseMove(int playerID)
+        public Pair<GameObject, GameObject> GetNextMove(int playerID)
         {
             GameObject selectedNode = ChooseStartingNode(playerID);
             GameObject chosenNode = ChooseBestPlayFromStartingNode(playerID, selectedNode);

@@ -8,31 +8,32 @@ using static UnityEngine.Rendering.DebugUI;
 namespace Territory.GameSystem.Node
 {
 
-    public class NodeElement : MonoBehaviour
+    public abstract class NodeElement : MonoBehaviour
     {
         [SerializeField]
-        private int _startingValue;
+        protected int _startingValue;
         [Tooltip("-1 for free")]
         [SerializeField]
-        private int _startingOwner = -1;
+        protected int _startingOwner = -1;
         [SerializeField]
-        private int _growthValue = 1;
+        protected int _growthValue = 1;
         [SerializeField]
-        private TMP_Text _growthText;
+        protected TMP_Text _growthText;
         [SerializeField]
-        private TMP_Text _valueText;
-        private NodeState _currentState;
-        private Vector3 _startingScale;
+        protected TMP_Text _valueText;
+        protected NodeState _currentState;
+        protected Vector3 _startingScale;
         public int Value { get => _value; }
         public int Growth { get => _growthValue; }
         public int OwnerID { get => _ownerID; }
 
-        private Renderer _renderer;
-        
-        private int _ownerID;
-        private int _value;
+        protected Renderer _renderer;
+
+        protected int _ownerID;
+        protected int _value;
+        public abstract void ConquerNode(int value, int attackID);
         // Start is called before the first frame update
-        void Start()
+        protected virtual void Start()
         {
             _ownerID = _startingOwner;
             _value = _startingValue;
@@ -57,34 +58,8 @@ namespace Territory.GameSystem.Node
 
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-        public void ConquerNode (int value, int attackID)
-        {
-
-            if (_ownerID == attackID || _ownerID == -1)     // When we conquer free or move on owned node
-            {
-                AddValue(value);
-                ChangeOwner(attackID);
-            }
-            else                                            // When we attack node
-            {
-                int newValue;
-                if (value >= _value)    //attack succed
-                {
-                    newValue = value - _value;
-                    ChangeOwner(attackID);
-                }
-                else // attack failed
-                {
-                    newValue = _value - value;
-                }
-                 UpdateValue(newValue);
-            }
-        }
+  
+        
         public void AddValue(int value)
         {
             UpdateValue(_value + value);
