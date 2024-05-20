@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 13742319}
   - component: {fileID: 13742321}
-  - component: {fileID: 13742320}
+  - component: {fileID: 13742322}
   m_Layer: 0
   m_Name: MovementHandler
   m_TagString: Untagged
@@ -156,7 +156,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 927754071}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &13742320
+--- !u!114 &13742321
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,10 +165,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 13742318}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e08b9242ec83714898a6df1042ddeb6, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d53013efe928494b9bb8ae3fbf2d0cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameEvent: {fileID: 11400000, guid: a69782895f6f5194c81e1d6ea4494c20, type: 2}
+  _movementPrefab: {fileID: 6574905750505692068, guid: 51c7ec1db05785b45afc9d3152cf599a, type: 3}
+  _graphManager: {fileID: 927754070}
+--- !u!114 &13742322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13742318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b6541be44fb084a8dc9268a095a757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameEvent: {fileID: 11400000, guid: c35cf7d9d7a01a947ad426f570648fe1, type: 2}
   _response:
     m_PersistentCalls:
       m_Calls:
@@ -184,20 +198,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &13742321
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 13742318}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d53013efe928494b9bb8ae3fbf2d0cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _movementPrefab: {fileID: 6574905750505692068, guid: 51c7ec1db05785b45afc9d3152cf599a, type: 3}
-  _graphManager: {fileID: 927754070}
 --- !u!1001 &20814829
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1169,22 +1169,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnValueMoved:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: a69782895f6f5194c81e1d6ea4494c20, type: 2}
-        m_TargetAssemblyTypeName: Territory.Events.BaseGameEvent`1[[Territory.Datas.Pair`2[[UnityEngine.GameObject,
-          UnityEngine
-        m_MethodName: Raise
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   OnUnselection:
     m_PersistentCalls:
       m_Calls:
@@ -1590,9 +1574,9 @@ MonoBehaviour:
   OnValueMoved:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: a69782895f6f5194c81e1d6ea4494c20, type: 2}
-        m_TargetAssemblyTypeName: Territory.Events.BaseGameEvent`1[[Territory.Datas.Pair`2[[UnityEngine.GameObject,
-          UnityEngine
+      - m_Target: {fileID: 11400000, guid: c35cf7d9d7a01a947ad426f570648fe1, type: 2}
+        m_TargetAssemblyTypeName: Territory.Events.BaseGameEvent`1[[Territory.Datas.MovementOrder,
+          Assembly-CSharp
         m_MethodName: Raise
         m_Mode: 0
         m_Arguments:

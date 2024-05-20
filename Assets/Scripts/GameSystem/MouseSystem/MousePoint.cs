@@ -18,8 +18,6 @@ namespace Territory.GameSystem.MouseSystem
         [SerializeField]
         private UnityEvent<GameObject> OnSelection;
         [SerializeField]
-        private UnityEvent<Pair<GameObject, GameObject>> OnValueMoved;
-        [SerializeField]
         private UnityEvent<GameObject> OnUnselection;
         [SerializeField]
         private UnityEvent OnPlayerEndMovement;

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Territory.Datas;
 using Territory.GameSystem.Interfaces;
+using Territory.GameSystem.Node;
 using Territory.GameSystem.PlayableCharacter;
 using Territory.Map;
 using UnityEngine;
@@ -25,7 +26,7 @@ namespace Territory.GameSystem
         private UnityEvent OnGameTick;
 
         [SerializeField]
-        private UnityEvent<Pair<GameObject, GameObject>> OnValueMoved;
+        private UnityEvent<MovementOrder> OnValueMoved;
         private float _gameTimeSinceLastTick;
         private bool _timeIsOn;
         // Start is called before the first frame update
@@ -63,8 +64,9 @@ namespace Territory.GameSystem
             while (!_playersHandler.GetPlayerByID(idPlayer).IsEliminated)
             {
                 Pair <GameObject, GameObject> move = computer.GetNextMove(_graph.Graph);
+                MovementOrder movementOrder = new MovementOrder(move.Value1, move.Value2, move.Value1.GetComponent<NodeElement>().Value);
                 Debug.Log("ID Played");
-                OnValueMoved.Invoke(move);
+                OnValueMoved.Invoke(movementOrder);
                 yield return new WaitForSeconds(timer);
             }
         }

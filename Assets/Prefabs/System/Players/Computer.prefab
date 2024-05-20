@@ -78,9 +78,9 @@ MonoBehaviour:
   OnValueMoved:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: a69782895f6f5194c81e1d6ea4494c20, type: 2}
-        m_TargetAssemblyTypeName: Territory.Events.BaseGameEvent`1[[Territory.Datas.Pair`2[[UnityEngine.GameObject,
-          UnityEngine
+      - m_Target: {fileID: 11400000, guid: c35cf7d9d7a01a947ad426f570648fe1, type: 2}
+        m_TargetAssemblyTypeName: Territory.Events.BaseGameEvent`1[[Territory.Datas.MovementOrder,
+          Assembly-CSharp
         m_MethodName: Raise
         m_Mode: 0
         m_Arguments:

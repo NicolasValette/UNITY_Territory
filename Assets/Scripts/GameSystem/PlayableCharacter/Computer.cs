@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Territory.Datas;
 using Territory.GameSystem.AI;
 using Territory.GameSystem.Interfaces;
+using Territory.GameSystem.Node;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,7 +15,7 @@ namespace Territory.GameSystem.PlayableCharacter
         [SerializeField]
         private UnityEvent OnNewEnnemyTurn;
         [SerializeField]
-        private UnityEvent<Pair<GameObject, GameObject>> OnValueMoved;
+        private UnityEvent<MovementOrder> OnValueMoved;
 
 
         private AIManager _ai;
@@ -45,10 +46,11 @@ namespace Territory.GameSystem.PlayableCharacter
             OnNewEnnemyTurn.Invoke();
 
             Pair<GameObject, GameObject> chosenMove = _ai.GetNextMove(ID);
+            MovementOrder movementOrder = new MovementOrder(chosenMove.Value1, chosenMove.Value2, chosenMove.Value1.GetComponent<NodeElement>().Value);
            
             StartCoroutine(Wait(_waitingTime, () =>
             {
-                OnValueMoved.Invoke(chosenMove);
+                OnValueMoved.Invoke(movementOrder);
                 Debug.Log("EndTurnCPU");
                 OnEndTurn.Invoke();
             }));

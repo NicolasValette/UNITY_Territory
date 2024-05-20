@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Territory.Datas;
+using Territory.GameSystem.Node;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.GraphicsBuffer;
@@ -10,8 +11,12 @@ namespace Territory.GameSystem.MouseSystem.States
     public class StateDrop : State
     {
         private bool _isMoveSucessfull = false;
-        public StateDrop(MousePoint mouse) : base(mouse)
+        private int _midValue;
+        private int _maxValue;
+        public StateDrop(MousePoint mouse, int maxValue=0, int midValue = 0) : base(mouse)
         {
+            _midValue = midValue;
+            _maxValue = maxValue;
         }
 
         public override void EnterState()
@@ -22,8 +27,9 @@ namespace Territory.GameSystem.MouseSystem.States
             if (raycastHit.collider != null)
             {
                 raycastHit.collider.gameObject.GetComponent<Renderer>().material.color = Color.red;
-              
-                _isMoveSucessfull =  _mouse.MovHandler.TryMoveValue(new Pair<GameObject, GameObject>(_mouse.SelectedGameObject, raycastHit.collider.gameObject));
+                int armyValue = Keyboard.current.ctrlKey.isPressed ? _midValue:_maxValue;
+                MovementOrder movementOrder = new MovementOrder(_mouse.SelectedGameObject, raycastHit.collider.gameObject, armyValue);
+                _isMoveSucessfull =  _mouse.MovHandler.TryMoveValue(movementOrder);
                 Debug.Log("Move is " + _isMoveSucessfull);
                 
               

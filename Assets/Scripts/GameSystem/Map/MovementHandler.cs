@@ -26,39 +26,37 @@ namespace Territory
         
         }
 
-        public void MoveValue(Pair<GameObject, GameObject> movementOrder)
+        public void MoveValue(MovementOrder movementOrder)
         {
-            List<GameObject> neighbours = _graphManager.GetNeighboursOfNode(movementOrder.Value1);
-            if (neighbours.Contains(movementOrder.Value2))
+            List<GameObject> neighbours = _graphManager.GetNeighboursOfNode(movementOrder.Road.Value1);
+            if (neighbours.Contains(movementOrder.Road.Value2))
             {
-                GameObject go = Instantiate(_movementPrefab, movementOrder.Value1.transform.position, Quaternion.identity);
-                go.GetComponent<MoveValue>().Target = movementOrder.Value2;
-                go.GetComponent<MoveValue>().Value = movementOrder.Value1.GetComponent<NodeElement>().Value;
-                go.GetComponent<MoveValue>().Owner = movementOrder.Value1.GetComponent<NodeElement>().OwnerID;
+                GameObject go = Instantiate(_movementPrefab, movementOrder.Road.Value1.transform.position, Quaternion.identity);
+                go.GetComponent<MoveValue>().Target = movementOrder.Road.Value2;
+                go.GetComponent<MoveValue>().Value = movementOrder.ArmyValue;
+                go.GetComponent<MoveValue>().Owner = movementOrder.Road.Value1.GetComponent<NodeElement>().OwnerID;
                 go.GetComponent<MoveValue>().StartMove();
-                movementOrder.Value1.GetComponent<NodeElement>().UpdateValue(0);
-                movementOrder.Value1.GetComponent<NodeElement>().UpdateDisplay();
+                movementOrder.Road.Value1.GetComponent<NodeElement>().UpdateValue(movementOrder.Road.Value1.GetComponent<NodeElement>().Value - movementOrder.ArmyValue);
+                movementOrder.Road.Value1.GetComponent<NodeElement>().UpdateDisplay();
             }
 
 
         }
-        public bool TryMoveValue(Pair<GameObject, GameObject> movementOrder)
+        public bool TryMoveValue(MovementOrder movementOrder)
         {
-            List<GameObject> neighbours = _graphManager.GetNeighboursOfNode(movementOrder.Value1);
-            if (neighbours.Contains(movementOrder.Value2))
+            List<GameObject> neighbours = _graphManager.GetNeighboursOfNode(movementOrder.Road.Value1);
+            if (neighbours.Contains(movementOrder.Road.Value2))
             {
-                GameObject go = Instantiate(_movementPrefab, movementOrder.Value1.transform.position, Quaternion.identity);
-                go.GetComponent<MoveValue>().Target = movementOrder.Value2;
-                go.GetComponent<MoveValue>().Value = movementOrder.Value1.GetComponent<NodeElement>().Value;
-                go.GetComponent<MoveValue>().Owner = movementOrder.Value1.GetComponent<NodeElement>().OwnerID;
+                GameObject go = Instantiate(_movementPrefab, movementOrder.Road.Value1.transform.position, Quaternion.identity);
+                go.GetComponent<MoveValue>().Target = movementOrder.Road.Value2;
+                go.GetComponent<MoveValue>().Value = movementOrder.ArmyValue;
+                go.GetComponent<MoveValue>().Owner = movementOrder.Road.Value1.GetComponent<NodeElement>().OwnerID;
                 go.GetComponent<MoveValue>().StartMove();
-                movementOrder.Value1.GetComponent<NodeElement>().UpdateValue(0);
-                movementOrder.Value1.GetComponent<NodeElement>().UpdateDisplay();
-
+                movementOrder.Road.Value1.GetComponent<NodeElement>().UpdateValue(movementOrder.Road.Value1.GetComponent<NodeElement>().Value - movementOrder.ArmyValue);
+                movementOrder.Road.Value1.GetComponent<NodeElement>().UpdateDisplay();
                 return true;
             }
             return false;
-
 
         }
     }
