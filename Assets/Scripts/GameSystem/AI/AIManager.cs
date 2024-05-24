@@ -13,7 +13,7 @@ namespace Territory.GameSystem.AI
 
         private GameObject ChooseStartingNode(int playerID)
         {
-            List<GameObject> ownedNode = _graphManager.GetListOfOwnedNodeWithValue(playerID);
+            List<GameObject> ownedNode = _graphManager.GetListOfOwnedNode(playerID);
             int selected =  Random.Range(0, ownedNode.Count);
             return ownedNode[selected];
         }

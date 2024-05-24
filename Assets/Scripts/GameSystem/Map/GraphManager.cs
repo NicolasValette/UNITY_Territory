@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Territory.Datas;
 using Territory.GameSystem.Node;
 using UnityEngine;
+using UnityEngine.Splines;
 
 namespace Territory.Map
 {
@@ -15,9 +16,10 @@ namespace Territory.Map
         [Header("List of roads")]
         [Tooltip("Describe all the roads of the map, each element in the list is a pair of node")]
         [SerializeField]
-        private List<Pair<GameObject, GameObject>> _roads;
+        private List<Triplet<GameObject, GameObject, SplineContainer>> _roads;
 
         private Graph<GameObject> _graph;
+        private Dictionary<string, SplineContainer> _roadSpline;
 
         public Graph<GameObject> Graph { get => _graph; }
 
@@ -40,6 +42,7 @@ namespace Territory.Map
         public void BuildGraph()
         {
             _graph = new Graph<GameObject>();
+            _roadSpline = new Dictionary<string, SplineContainer>();
             //_graph.AddEdge(_gameObjects[0], _gameObjects[1]);
             //_graph.AddEdge(_gameObjects[1], _gameObjects[2]);
             //_graph.AddEdge(_gameObjects[1], _gameObjects[3]);
@@ -48,7 +51,37 @@ namespace Territory.Map
             for (int i = 0; i < _roads.Count; i++)
             {
                 _graph.AddEdge(_roads[i].Value1, _roads[i].Value2);
+                string key = _roads[i].Value1.GetInstanceID().ToString() + _roads[i].Value2.GetInstanceID();
+                _roadSpline.Add(key, _roads[i].Value3);
             }
+        }
+        /// <summary>
+        /// Get the spline of the road between starting and ending
+        /// </summary>
+        /// <param name="startingNode">Starting node of the road</param>
+        /// <param name="endingNode">Ending node of the road</param>
+        /// <param name="splineResult">the spline</param>
+        /// <returns>Returns 1 if the road exists, -1 if the roads exists but backward, end 0 if the road doesn't exist</returns>
+        public int GetSpline (GameObject startingNode, GameObject endingNode, out SplineContainer splineResult)
+        {
+            string key = startingNode.GetInstanceID().ToString() + endingNode.GetInstanceID();
+            string reverseKey = endingNode.GetInstanceID().ToString() + startingNode.GetInstanceID();
+            if (_roadSpline.ContainsKey(key))
+            {
+                splineResult = _roadSpline[key];
+                return 1;
+            }
+            else if (_roadSpline.ContainsKey(reverseKey))
+            {
+                splineResult = _roadSpline[reverseKey];
+                return -1;
+            }
+            else
+            {
+                splineResult = null;
+                return 0;
+            }
+            
         }
         public List<GameObject> GetNeighboursOfNode(GameObject node)
         {

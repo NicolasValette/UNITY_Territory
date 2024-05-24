@@ -13,7 +13,6 @@ namespace Territory.Datas
             Road = new Pair<GameObject, GameObject> (road1, road2);
             ArmyValue = armyValue;
         }
-      
         public Pair<GameObject, GameObject> Road;
         public int ArmyValue;
     }

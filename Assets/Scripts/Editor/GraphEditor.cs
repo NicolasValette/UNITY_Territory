@@ -14,19 +14,9 @@ namespace Territory.CustomEdit
         {
 
             _graph = target as GraphManager;
-            _graph.BuildGraph();
+          //  _graph.BuildGraph();
            
-            //   t.DrawGraph();
-            var tr = _graph.transform;
-            var pos = tr.position;
-            // display an orange disc where the object is
-            var color = new Color(1, 0.8f, 0.4f, 1);
-            Handles.color = color;
-            Handles.DrawWireDisc(pos, tr.up, 1.0f);
-            // display object "value" in scene
-            GUI.color = color;
-            Handles.Label(pos, _graph.Graph.Nodes.Count.ToString());
-
+     
 
         }
         public override void OnInspectorGUI()
