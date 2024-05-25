@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Territory.Datas;
 using Territory.GameSystem.Node;
 using TMPro;
+using UnityEditor.Animations;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.Splines;
 
@@ -23,6 +26,7 @@ namespace Territory
         private int _value;
         private int _ownerID;
 
+        private SpriteRenderer _spriteRenderer;
         private SplineContainer _spline;
         private bool _isBackward;
         private bool _isMovementFinish;
@@ -30,6 +34,12 @@ namespace Territory
         {
             //EndingPosition = _position.position;
             //transform.rotation = Quaternion.LookRotation(EndingPosition - transform.position, transform.right);
+            _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            
+            if (_spriteRenderer == null )
+            {
+                Debug.LogError("Sprite missing for army");
+            }
             _isMovementFinish = false;
         }
 
@@ -41,6 +51,10 @@ namespace Territory
             _ownerID = ownerID;
             _isBackward = isBackward;
             _spline = spline;
+
+            _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            
+            
         }
 
         public void StartMove()
@@ -77,6 +91,23 @@ namespace Territory
             Destroy(gameObject);
         }
 
+        private void Flip (Vector3 previousPos)
+        {
+            if (_spriteRenderer == null)
+            {
+                _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            }
+            Vector3 direction = transform.position - previousPos;
+            float dotProduct = Vector3.Dot(direction, Vector3.right);
+            if (dotProduct < 0)
+            {
+                _spriteRenderer.flipX = true;
+            }
+            else
+            {
+                _spriteRenderer.flipX = false;
+            }
+        }
         public IEnumerator Move()
         {
 
@@ -86,8 +117,9 @@ namespace Territory
                 while (timer >= 0)
                 {
                     _spline.Evaluate(timer, out Unity.Mathematics.float3 position, out Unity.Mathematics.float3 tangeant, out Unity.Mathematics.float3 up);
-                    
+                    Vector3 previousPos = transform.position;
                     transform.position = /*_spline.transform.position +*/ new Vector3(position.x, position.y, position.z);
+                    Flip(previousPos);
                     timer -= Time.deltaTime;
                     yield return null;
                 }
@@ -99,7 +131,9 @@ namespace Territory
                 while (timer < _duration)
                 {
                     _spline.Evaluate(timer, out Unity.Mathematics.float3 position, out Unity.Mathematics.float3 tangeant, out Unity.Mathematics.float3 up);
+                    Vector3 previousPos = transform.position;
                     transform.position = /*_spline.transform.position +*/ new Vector3(position.x, position.y, position.z);
+                    Flip(previousPos);
                     timer += Time.deltaTime;
                     yield return null;
                 }
