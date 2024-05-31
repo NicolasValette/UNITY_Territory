@@ -43,7 +43,7 @@ public class DrawRoad : MonoBehaviour
     public void DrawGraph(Graph<GameObject> graph)
     {
         _roadList = new List<GameObject>();
-        List<Pair<GameObject, GameObject>> edges = graph.GetUndirectedEdges();
+        List<Pair<GameObject, GameObject>> edges = graph.GetUndirectedEdges(); 
 
         for (int i = 0; i < edges.Count; i++)
         {
@@ -55,8 +55,6 @@ public class DrawRoad : MonoBehaviour
             lr.startColor = Color.red;
             lr.endColor = Color.red;
             _roadList.Add(road);
-            
-            
         }
         
     }

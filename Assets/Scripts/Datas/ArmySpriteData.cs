@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Animations;
 using UnityEngine;
 
 namespace Territory.Datas
@@ -11,9 +10,9 @@ namespace Territory.Datas
     {
         [Tooltip("List of pair \"Color-Prefab\"")]
         [SerializeField]
-        private List<Pair<PlayerColorEnum, GameObject>> _listArmy;
+        private List<Pair<PlayerColorEnum, ArmyTeamSpriteData>> _listArmy;
 
-        public GameObject this[PlayerColorEnum key]
+        public ArmyTeamSpriteData this[PlayerColorEnum key]
         {
             get
             {
@@ -21,7 +20,7 @@ namespace Territory.Datas
                 return t.Value2;
             }
         }
-            
+
 
     }
 }

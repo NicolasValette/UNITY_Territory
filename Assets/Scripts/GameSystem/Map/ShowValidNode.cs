@@ -46,13 +46,11 @@ namespace Territory.Map
         }
         public void ShowValidNodeFromSelection(GameObject startingNode)
         {
-            Debug.Log("Show");
             startingNode.GetComponent<NodeElement>().SelectNode();
             ChangeColorOfNeighbours(startingNode, Color.green, true);
         }
         public void HideValidNode(GameObject startingNode)
         {
-            Debug.Log("Hide");
             startingNode.GetComponent<NodeElement>().UnselectNode();
             ChangeColorOfNeighbours(startingNode, Color.white, false);
         }

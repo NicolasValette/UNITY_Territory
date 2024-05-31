@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Territory.Datas;
+using Territory.GameSystem.AI.Core;
 using Territory.Map;
 using UnityEngine;
 
@@ -11,23 +12,23 @@ namespace Territory.GameSystem.AI
         [SerializeField]
         private GraphManager _graphManager;
 
-        private GameObject ChooseStartingNode(int playerID)
+
+
+        public GraphManager GraphMgr { get => _graphManager; }
+        
+        //public Pair<GameObject, GameObject> GetNextMove(int playerID)
+        //{
+        //    GameObject selectedNode = ChooseStartingNode(playerID);
+        //    GameObject chosenNode = ChooseBestPlayFromStartingNode(playerID, selectedNode);
+        //    return new Pair<GameObject, GameObject>(selectedNode, chosenNode);
+        //}
+        public AICore GetAICoreEasy (int playerID)
         {
-            List<GameObject> ownedNode = _graphManager.GetListOfOwnedNode(playerID);
-            int selected =  Random.Range(0, ownedNode.Count);
-            return ownedNode[selected];
+            return new AIEasyCore(playerID, _graphManager);
         }
-        private GameObject ChooseBestPlayFromStartingNode(int playerID, GameObject startingNode)
+        public AICore GetAICoreMedium(int playerID)
         {
-            List<GameObject> neighbours = _graphManager.GetNeighboursOfNode(startingNode);
-            int selected = Random.Range(0, neighbours.Count);
-            return neighbours[selected];
-        }
-        public Pair<GameObject, GameObject> GetNextMove(int playerID)
-        {
-            GameObject selectedNode = ChooseStartingNode(playerID);
-            GameObject chosenNode = ChooseBestPlayFromStartingNode(playerID, selectedNode);
-            return new Pair<GameObject, GameObject>(selectedNode, chosenNode);
+            return new AIMediumCore(playerID, _graphManager);
         }
     }
 }

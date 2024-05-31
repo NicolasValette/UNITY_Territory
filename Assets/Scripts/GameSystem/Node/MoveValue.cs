@@ -1,11 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Territory.Datas;
 using Territory.GameSystem.Node;
 using TMPro;
-using UnityEditor.Animations;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.Splines;
 
@@ -29,7 +24,6 @@ namespace Territory
         private SpriteRenderer _spriteRenderer;
         private SplineContainer _spline;
         private bool _isBackward;
-        private bool _isMovementFinish;
         private void Start()
         {
             //EndingPosition = _position.position;
@@ -40,7 +34,6 @@ namespace Territory
             {
                 Debug.LogError("Sprite missing for army");
             }
-            _isMovementFinish = false;
         }
 
         public void InitMove(GameObject origin, GameObject target, int value, int ownerID, SplineContainer spline, bool isBackward)
@@ -141,8 +134,6 @@ namespace Territory
                 transform.position = /*_spline.transform.position +*/ new Vector3(finalPosition.x, finalPosition.y, finalPosition.z);
             }
             
-
-            _isMovementFinish = true;
             EndMove();
             
         }

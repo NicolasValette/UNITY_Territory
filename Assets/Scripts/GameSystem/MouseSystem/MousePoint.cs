@@ -62,14 +62,13 @@ namespace Territory.GameSystem.MouseSystem
 
         public void OnClick(InputValue value)
         {
-            Debug.Log("click");
             if (_currentState is not StateInactive)
             {
                 if (value.isPressed)
                 {
                     Ray rayToMouse = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
                     RaycastHit2D raycastHit = Physics2D.Raycast(rayToMouse.origin, rayToMouse.direction);
-                    Debug.Log("ray");
+                 
                     if (raycastHit.collider != null)
                     {
 
@@ -100,17 +99,14 @@ namespace Territory.GameSystem.MouseSystem
 
         public void ActivatePointer()
         {
-            Debug.Log("Enable");
             IsActive = true;
         }
         public void StartPlayerTurn(int playerID)
         {
-            Debug.Log("playerID : " + playerID);
             PlayerID = playerID;
         }
         public void DeactivatePointer()
         {
-            Debug.Log("Disable");
             IsActive = false;
         }
         public void BadSelection()

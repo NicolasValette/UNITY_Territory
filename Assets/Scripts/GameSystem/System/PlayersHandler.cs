@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Territory.GameSystem.AI;
+using Territory.GameSystem.AI.Core;
 using Territory.GameSystem.PlayableCharacter;
 using UnityEngine;
 
@@ -64,7 +65,9 @@ namespace Territory.GameSystem
             for (int i = 0; i < nbComputerPlayer; i++)
             {
                 GameObject player = Instantiate(_computerPrefab, Vector3.zero, Quaternion.identity);
-                player.GetComponent<Computer>().InitPlayer(playerID, _AImanager);
+                AICore core = playerID == 0 ? _AImanager.GetAICoreEasy(playerID) :_AImanager.GetAICoreMedium(playerID);
+                player.GetComponent<Computer>().InitPlayer(playerID, core, _AImanager.GraphMgr);
+               
                 playerID++;
                 PlayerGOList.Add(player);
                 PlayersList.Add(player.GetComponent<Character>());

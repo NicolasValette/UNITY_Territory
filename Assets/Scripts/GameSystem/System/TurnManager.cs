@@ -133,7 +133,6 @@ namespace Territory.GameSystem
                 _currentPlayerID++;
                 if (_currentPlayerID >= _characterList.Count)   //Tick game
                 {
-                    Debug.Log("Growth");
                     //GrowthEvent
                     _growthTurn = true;
                     OnGrowth.Invoke();
@@ -149,7 +148,6 @@ namespace Territory.GameSystem
         }
         public void GameWin(int winnerID = -1)
         {
-            Debug.Log("Game win by id : " + winnerID);
             OnGameWin.Invoke(winnerID);
         }
 

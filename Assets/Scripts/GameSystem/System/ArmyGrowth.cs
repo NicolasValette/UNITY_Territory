@@ -33,7 +33,6 @@ namespace Territory.GameSystem
         public void Growth()
         {
             StartCoroutine(Wait(() => {
-                Debug.Log("EndGrowth");
                 OnEndTurn.Invoke();
                 }));
         }

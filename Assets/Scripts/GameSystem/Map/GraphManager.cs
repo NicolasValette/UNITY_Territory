@@ -13,6 +13,8 @@ namespace Territory.Map
 
         [SerializeField]
         private DrawRoad _drawer;
+        [SerializeField]
+        private bool _drawGraph = false;
         [Header("List of roads")]
         [Tooltip("Describe all the roads of the map, each element in the list is a pair of node")]
         [SerializeField]
@@ -28,7 +30,7 @@ namespace Territory.Map
         {
 
             BuildGraph();
-            DrawGraph();
+            if (_drawGraph) DrawGraph();
 
           
         }

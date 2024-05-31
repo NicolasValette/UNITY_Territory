@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using Territory.Animation;
+using Territory.Datas;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEngine.Rendering.DebugUI;
 
 namespace Territory.GameSystem.Node
@@ -21,13 +23,17 @@ namespace Territory.GameSystem.Node
         protected TMP_Text _growthText;
         [SerializeField]
         protected TMP_Text _valueText;
+        [SerializeField]
+        protected Image _RibbonImage;
+        [SerializeField]
+        protected ArmySpriteData _ArmiesSprite;
         protected NodeState _currentState;
         protected Vector3 _startingScale;
         public int Value { get => _value; }
         public int Growth { get => _growthValue; }
         public int OwnerID { get => _ownerID; }
 
-        protected Renderer _renderer;
+        protected SpriteRenderer _renderer;
 
         protected int _ownerID;
         [SerializeField]
@@ -42,18 +48,9 @@ namespace Territory.GameSystem.Node
             _valueText.text = _value.ToString();
             _growthText.text = $"+{_growthValue}";
             _startingScale = transform.localScale;
-            _renderer = GetComponent<Renderer>();
-            if (_ownerID == 0)
+            _renderer = GetComponent<SpriteRenderer>();
+            if (_ownerID != 0 && _ownerID != 1) 
             {
-                _renderer.material.color = Color.blue;
-            }
-            else if (OwnerID == 1)
-            {
-                _renderer.material.color = Color.red;
-            }
-            else
-            {
-                _renderer.material.color = Color.white;
                 GetComponentInChildren<PlayAnimationOnEvent>().IsActive = false;
             }
 
@@ -93,22 +90,19 @@ namespace Territory.GameSystem.Node
             }
             _ownerID = ID;
         }
-        public void UpdateDisplay()
+        public virtual void UpdateDisplay()
         {
             _valueText.text = _value.ToString();
             if (_ownerID == 0)
             {
-                _renderer.material.color = Color.blue;
+                _RibbonImage.sprite = _ArmiesSprite[PlayerColorEnum.Blue].RibbonSPrite;
             }
             else if (_ownerID == 1)
             {
-                _renderer.material.color = Color.red;
-            }
-            else
-            {
-                _renderer.material.color = Color.white;
+                _RibbonImage.sprite = _ArmiesSprite[PlayerColorEnum.Red].RibbonSPrite;
             }
         }
+      
         public void GrowPopulation()
         {
             if (_ownerID != -1)

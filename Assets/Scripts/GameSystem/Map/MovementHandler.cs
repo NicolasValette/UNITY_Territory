@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Territory.Datas;
 using Territory.GameSystem.Node;
 using Territory.Map;
-using UnityEditor.Splines;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Splines;
@@ -29,7 +28,7 @@ namespace Territory
             List<GameObject> neighbours = _graphManager.GetNeighboursOfNode(movementOrder.Road.Value1);
             if (neighbours.Contains(movementOrder.Road.Value2))
             {
-                GameObject prefab = (movementOrder.Road.Value1.GetComponent<NodeElement>().OwnerID == 0) ? _armySpriteData[PlayerColorEnum.Blue] : _armySpriteData[PlayerColorEnum.Red];
+                GameObject prefab = (movementOrder.Road.Value1.GetComponent<NodeElement>().OwnerID == 0) ? _armySpriteData[PlayerColorEnum.Blue].ArmyMoverPrefab : _armySpriteData[PlayerColorEnum.Red].ArmyMoverPrefab;
                 GameObject go = Instantiate(prefab, movementOrder.Road.Value1.transform.position, Quaternion.identity);
                 int direction = _graphManager.GetSpline(movementOrder.Road.Value1, movementOrder.Road.Value2, out SplineContainer splineResult);
                 if (direction != 0)

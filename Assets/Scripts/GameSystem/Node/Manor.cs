@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Territory.Datas;
 using UnityEngine;
 
 namespace Territory.GameSystem.Node
 {
     public class Manor : NodeElement
     {
+       
         public override void ConquerNode(int value, int attackID)
         {
 
@@ -27,6 +29,19 @@ namespace Territory.GameSystem.Node
                     newValue = _value - value;
                 }
                 UpdateValue(newValue);
+            }
+        }
+
+        public override void UpdateDisplay()
+        {
+            base.UpdateDisplay();
+            if (_ownerID == 0)
+            {
+                _renderer.sprite = _ArmiesSprite[PlayerColorEnum.Blue].ManorSprite;
+            }
+            else if (_ownerID == 1)
+            {
+                _renderer.sprite = _ArmiesSprite[PlayerColorEnum.Red].ManorSprite;
             }
         }
     }

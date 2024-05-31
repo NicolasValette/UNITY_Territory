@@ -26,13 +26,10 @@ namespace Territory.GameSystem.MouseSystem.States
             RaycastHit2D raycastHit = Physics2D.Raycast(rayToMouse.origin, rayToMouse.direction);
             if (raycastHit.collider != null)
             {
-                raycastHit.collider.gameObject.GetComponent<Renderer>().material.color = Color.red;
                 int armyValue = Keyboard.current.ctrlKey.isPressed ? _midValue:_maxValue;
                 MovementOrder movementOrder = new MovementOrder(_mouse.SelectedGameObject, raycastHit.collider.gameObject, armyValue);
                 _isMoveSucessfull =  _mouse.MovHandler.TryMoveValue(movementOrder);
-                Debug.Log("Move is " + _isMoveSucessfull);
-                
-              
+                 
             }
             _mouse.UnselectNode();
         }

@@ -41,8 +41,8 @@ namespace Territory.Animation
         }
         public void PlayGrowthAnimation()
         {
-            _text.text = "Army growth !";
-            PlayAnimation();
+            //_text.text = "Army growth !";
+            //PlayAnimation();
         }
     }
 }

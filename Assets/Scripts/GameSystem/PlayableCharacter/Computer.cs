@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using Territory.Datas;
 using Territory.GameSystem.AI;
+using Territory.GameSystem.AI.Core;
 using Territory.GameSystem.Interfaces;
 using Territory.GameSystem.Node;
+using Territory.Map;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -17,8 +19,8 @@ namespace Territory.GameSystem.PlayableCharacter
         [SerializeField]
         private UnityEvent<MovementOrder> OnValueMoved;
 
-
-        private AIManager _ai;
+        private GraphManager _graphManager;
+        private AICore _ai;
 
         // Start is called before the first frame update
         void Start()
@@ -32,10 +34,11 @@ namespace Territory.GameSystem.PlayableCharacter
         
         }
 
-        public void InitPlayer(int ID, AIManager aiManager)
+        public void InitPlayer(int ID, AICore ai, GraphManager graph)
         {
             InitPlayer(ID);
-            _ai = aiManager;
+            _ai = ai;
+            _graphManager = graph;
         }
         public override void Play()
         {
@@ -45,20 +48,19 @@ namespace Territory.GameSystem.PlayableCharacter
             }
             OnNewEnnemyTurn.Invoke();
 
-            Pair<GameObject, GameObject> chosenMove = _ai.GetNextMove(ID);
+            Pair<GameObject, GameObject> chosenMove = _ai.GetNextMove(_graphManager.Graph);
             MovementOrder movementOrder = new MovementOrder(chosenMove.Value1, chosenMove.Value2, chosenMove.Value1.GetComponent<NodeElement>().Value);
            
             StartCoroutine(Wait(_waitingTime, () =>
             {
                 OnValueMoved.Invoke(movementOrder);
-                Debug.Log("EndTurnCPU");
                 OnEndTurn.Invoke();
             }));
         }
 
         public Pair<GameObject, GameObject> GetNextMove(Graph<GameObject> graph)
         {
-            return _ai.GetNextMove(ID);
+            return _ai.GetNextMove(graph);
         }
     }
 }

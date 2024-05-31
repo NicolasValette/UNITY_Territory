@@ -25,13 +25,12 @@ namespace Territory.CustomEdit
           
             if (GUILayout.Button("Draw roads"))
             {
-                Debug.Log("draw");
+                _graph.BuildGraph();
                 _graph.DrawGraph();
             }
             if (GUILayout.Button("Erase roads"))
             {
                 GameObject roadDrawer = GameObject.Find("RoadDrawer");
-                Debug.Log("children : " + roadDrawer.transform.childCount);
                 for (int i = roadDrawer.transform.childCount - 1; i >= 0; i--)
                 {
                     Transform child = roadDrawer.transform.GetChild(i);

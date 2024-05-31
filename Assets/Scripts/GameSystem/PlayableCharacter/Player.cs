@@ -23,13 +23,11 @@ namespace Territory.GameSystem.PlayableCharacter
 
         public override void Play()
         {
-            Debug.Log("Player Turn");
             OnNewPlayerTurn.Invoke(ID);
             //StartCoroutine(Wait(_waitingTime));
         }
         public void EndTurn()
         {
-            Debug.Log("End Player Turn");
             StartCoroutine(Wait(0.2f, OnEndTurn.Invoke));
         }
     }

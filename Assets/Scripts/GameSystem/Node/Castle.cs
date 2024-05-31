@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Territory.Datas;
 using Territory.GameSystem.Node;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
@@ -34,7 +35,17 @@ namespace Territory.GameSystem.Node
             }
         }
 
-
-
+        public override void UpdateDisplay()
+        {
+            base.UpdateDisplay();
+            if (_ownerID == 0)
+            {
+                _renderer.sprite = _ArmiesSprite[PlayerColorEnum.Blue].CastleSprite;
+            }
+            else if (_ownerID == 1)
+            {
+                _renderer.sprite = _ArmiesSprite[PlayerColorEnum.Red].CastleSprite;
+            }
+        }
     }
 }
