@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.InputSystem;
 
 namespace Territory.Audio
 {
@@ -48,7 +49,11 @@ namespace Territory.Audio
         // Update is called once per frame
         void Update()
         {
-
+            if (Keyboard.current.kKey.wasPressedThisFrame)
+            {
+                _audioPlayer.Stop();
+                _audioPlayer.Play();
+            }
         }
         public void Play(AudioClip clip)
         {

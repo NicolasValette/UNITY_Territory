@@ -15,8 +15,6 @@ namespace Territory.UI
         private TMP_Text _AITimerText;
         [SerializeField]
         private Slider _volumeSlider;
-        [SerializeField]
-        private TMP_Text _volumeText;
         // Start is called before the first frame update
         void Start()
         {
@@ -35,12 +33,12 @@ namespace Territory.UI
         public void SetSliderValue(float value)
         {
             _AISlider.value = value;
-            _AITimerText.text = value.ToString();
+            _AITimerText.text = (Mathf.Floor(value * 100)/100).ToString();
         }
         public void SetSliderVolumeValue(float value)
         {
             _volumeSlider.value = value;
-            _volumeText.text = value.ToString();
+           
         }
 
         public void SaveAITimer()
@@ -52,7 +50,8 @@ namespace Territory.UI
         {
             float value = PlayerPrefs.GetFloat("AITimer", 2f);
             _AISlider.value = value;
-            _AITimerText.text = _AISlider.value.ToString();
+            
+            _AITimerText.text = (Mathf.Floor(_AISlider.value * 100) / 100).ToString();
         }
         public void SaveVolume()
         {
@@ -63,7 +62,6 @@ namespace Territory.UI
         {
             float value = PlayerPrefs.GetFloat("MasterVolume", 0f);
             _volumeSlider.value = value;
-            _volumeText.text = _volumeSlider.value.ToString();
         }
 
 
